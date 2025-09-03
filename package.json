@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build": "astro build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@astrojs/ts-plugin": "^1.10.4",
