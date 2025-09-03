@@ -11,7 +11,7 @@ Este repositorio contiene resoluciones y análisis de máquinas de la plataforma
 Cada writeup incluye:
 
 - Nombre de la máquina.
-- Sistema operativo y versión (si es relevante).
+- Sistema operativo.
 - Nivel de dificultad.
 - Descripción del enfoque y metodología utilizada.
 - Comandos y scripts relevantes.
