@@ -1,0 +1,108 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/markdownStyles.css"; 
+
+export async function getStaticPaths() {
+  const writeups = await getCollection("writeups");
+  return writeups.map((writeup) => ({
+    params: { id: writeup.slug },
+  }));
+}
+
+// Obtener el slug de la URL
+const { id } = Astro.params;
+
+// Traer el writeup correspondiente
+const writeups = await getCollection("writeups");
+const writeup = writeups.find((w) => w.slug === id);
+
+if (!writeup) throw new Error(`Writeup con id "${id}" no encontrado.`);
+
+const { data, slug } = writeup;
+const { title, os, img, plataforma, description, skills } = data;
+
+const { Content } = await render(writeup);
+
+export const prerender = true;
+---
+
+<Layout pageClass="writeup-page" title={`${title} - Writeups Hacking`}>
+  <!-- Contenedor responsivo -->
+  <div class="flex flex-col md:flex-row gap-12">
+
+    <!-- Aside -->
+    <aside class="flex flex-col items-center gap-4 w-full md:w-64">
+      <div class="sticky top-1 flex flex-col items-center">
+
+        <!-- Título principal y logo -->
+        <div transition:name="writeups-title-group" class="text-center">
+          <div class="flex flex-row items-center gap-1 justify-center">
+            <span class="text-3xl font-extrabold text-[#bfff00]">Writeups</span>
+            <img src="/code/hacker.svg" alt="Logo" class="w-10 h-10" />
+          </div>
+          <span class="text-3xl font-extrabold text-[#bfff00] mt-0">Hacking</span>
+        </div>
+
+        <!-- Botón volver -->
+        <a href="/" class="mt-4 text-xl text-white opacity-70 hover:underline">
+          ← Volver atrás
+        </a>
+
+        <!-- Imagen de la máquina -->
+        <img 
+          transition:name={`img-${slug}`} 
+          class="rounded w-full max-w-xs md:w-55 h-auto mt-6" 
+          src={`/code/${img}`} 
+          alt={title} 
+        />
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="w-full md:max-w-3xl flex-1">
+      <h1 transition:name={`title-${slug}`} class="text-6xl font-bold mb-6">{title}</h1>
+
+      <!-- Skills Section estilo Markdown con colores -->
+      {skills && skills.length > 0 && (
+        <div class="mb-8 border-4 border-[#bfff00] rounded-lg p-6 bg-[#0f0f0f]">
+          <h3 class="text-3xl font-bold text-center text-[#CCCCCC] py-2
+                    hover:text-[#888888] hover:border-[#888888] transition-colors duration-300">
+            Skills
+          </h3>
+
+          <hr class="my-0 border-t-4 border-[#bfff00]" />
+
+          <ul class="w-full mt-4 flex flex-wrap justify-center gap-2 sm:gap-3">
+            {skills.map((skill, index) => (
+              <li class="inline-block text-center bg-[#1f1f1f] text-[#bfff00] px-3 py-2 sm:px-4 sm:py-2 rounded-full font-medium
+              hover:bg-[#888888] hover:text-black transition-colors duration-300 break-words text-sm sm:text-base max-w-full">
+                {index + 1}. {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <!-- Markdown Content -->
+      <div class="markdown space-y-4">
+        <Content />
+      </div>
+    </main>
+  </div>
+
+  <!-- Footer compacto con fondo #13151a -->
+  <footer class="py-1 mt-12 text-gray-400" style="background-color: #13151a;">
+    <div class="max-w-screen-xl mx-auto px-4 text-center space-y-0 text-sm">
+      <p>&copy; 4jh4ck 2025 - Writeups Hacking. Todos los derechos reservados.</p>
+      <p>
+        Design by: 4jh4ck, Original Design: 
+        <a href="https://github.com/midudev" target="_blank" rel="noopener" class="hover:text-[#bfff00] transition-colors">@Midudev</a>
+      </p>
+      <p>
+        Theme Inspiration: 
+        <a href="https://github.com/midudev/astro-5-dev-books" target="_blank" rel="noopener" class="hover:text-[#bfff00] transition-colors">astro-5-dev-books</a>
+      </p>
+    </div>
+  </footer>
+</Layout>

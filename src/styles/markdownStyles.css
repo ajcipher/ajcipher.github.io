@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/* markdownStyles.css */
+
+/* Estilo base para markdown */
+.markdown {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  line-height: 1.7;
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+/* Tablet en adelante */
+@media (min-width: 768px) {
+  .markdown {
+    max-width: 70ch;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* PC grandes */
+@media (min-width: 1280px) {
+  .markdown {
+    max-width: 100ch;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* Ajuste especial cuando hay aside (writeup-page) */
+body.writeup-page .markdown {
+  max-width: 120ch; /* más ancho para compensar el aside */
+}
+
+/* Encabezados */
+.markdown h1 {
+  font-size: 2rem; 
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: #bfff00;
+}
+@media (min-width: 768px) { .markdown h1 { font-size: 3rem; } }
+
+.markdown h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: #bfff00;
+}
+@media (min-width: 768px) { .markdown h2 { font-size: 2.25rem; } }
+
+.markdown h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #bfff00;
+}
+@media (min-width: 768px) { .markdown h3 { font-size: 1.75rem; } }
+
+.markdown h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #bfff00;
+}
+@media (min-width: 768px) { .markdown h4 { font-size: 1.25rem; } }
+
+/* Párrafos */
+.markdown p { margin-bottom: 1rem; }
+
+/* Listas */
+.markdown ul { list-style-type: disc; padding-left: 1.5rem; }
+.markdown li { margin-bottom: 0.25rem; }
+
+/* Imágenes */
+.markdown img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0.5rem 0;
+}
+
+/* Código */
+.markdown pre {
+  background-color: #1f1f1f;
+  color: #bfff00;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  max-width: 100%;
+  white-space: pre-wrap;
+}
+
+.markdown code {
+  background-color: #13151a;
+  color: #bfff00;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.875rem;
+}
+
+/* Scroll del código */
+.markdown pre::-webkit-scrollbar { height: 6px; }
+.markdown pre::-webkit-scrollbar-thumb { background-color: #4b5563; border-radius: 9999px; }
+.markdown pre::-webkit-scrollbar-track { background-color: #0f0f0f; }
+
+/* Tablas */
+.markdown table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+/* Efecto lightbox simple para imágenes */
+.markdown img {
+  cursor: zoom-in;
+  transition: transform 0.3s ease;
+}
+
+.markdown img:hover {
+  transform: scale(1.05);
+}
+
+/* Overlay para imagen ampliada */
+#lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#lightbox-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 0.5rem;
+}
+
+#lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
