@@ -1,17 +1,1 @@
-
-import __ASTRO_IMAGE_IMPORT_1Nj2Eq from "../../../code/ping.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md";
-import __ASTRO_IMAGE_IMPORT_ZOk4Ep from "../../../code/nmap.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md";
-import __ASTRO_IMAGE_IMPORT_Z1pV4am from "../../../code/ssh.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md";
-import __ASTRO_IMAGE_IMPORT_Z10wG4e from "../../../code/port5000.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md";
-import __ASTRO_IMAGE_IMPORT_Z1cbU4K from "../../../code/webpage.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md";
-import __ASTRO_IMAGE_IMPORT_vkkJg from "../../../code/payload1.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md";
-import __ASTRO_IMAGE_IMPORT_ZH5kIE from "../../../code/term1.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md";
-import __ASTRO_IMAGE_IMPORT_AS8r5 from "../../../code/payload3.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md";
-import __ASTRO_IMAGE_IMPORT_ZfJxwo from "../../../code/ping.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fpage.md";
-import __ASTRO_IMAGE_IMPORT_2bNsWH from "../../../code/nmap.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fpage.md";
-import __ASTRO_IMAGE_IMPORT_5OpSf from "../../../code/ping.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fprueba.md";
-import __ASTRO_IMAGE_IMPORT_1LF138 from "../../../code/nmap.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fprueba.md";
-import __ASTRO_IMAGE_IMPORT_ZEUxxK from "../../../code/ping.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Ftobi.md";
-import __ASTRO_IMAGE_IMPORT_1LCsVl from "../../../code/nmap.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Ftobi.md";
-export default new Map([["../../../code/ping.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md", __ASTRO_IMAGE_IMPORT_1Nj2Eq], ["../../../code/nmap.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md", __ASTRO_IMAGE_IMPORT_ZOk4Ep], ["../../../code/ssh.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md", __ASTRO_IMAGE_IMPORT_Z1pV4am], ["../../../code/port5000.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md", __ASTRO_IMAGE_IMPORT_Z10wG4e], ["../../../code/webpage.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md", __ASTRO_IMAGE_IMPORT_Z1cbU4K], ["../../../code/payload1.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md", __ASTRO_IMAGE_IMPORT_vkkJg], ["../../../code/term1.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md", __ASTRO_IMAGE_IMPORT_ZH5kIE], ["../../../code/payload3.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fcode.md", __ASTRO_IMAGE_IMPORT_AS8r5], ["../../../code/ping.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fpage.md", __ASTRO_IMAGE_IMPORT_ZfJxwo], ["../../../code/nmap.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fpage.md", __ASTRO_IMAGE_IMPORT_2bNsWH], ["../../../code/ping.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fprueba.md", __ASTRO_IMAGE_IMPORT_5OpSf], ["../../../code/nmap.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Fprueba.md", __ASTRO_IMAGE_IMPORT_1LF138], ["../../../code/ping.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Ftobi.md", __ASTRO_IMAGE_IMPORT_ZEUxxK], ["../../../code/nmap.png?astroContentImageFlag=&importer=src%2Fcontent%2Fwriteups%2Ftobi.md", __ASTRO_IMAGE_IMPORT_1LCsVl]]);
-		
+export default new Map();
