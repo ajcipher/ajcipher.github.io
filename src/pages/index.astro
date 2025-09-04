@@ -21,7 +21,7 @@ export const prerender = true;
     <div transition:name="writeups-title-group" class="text-center text-7xl text-[#bfff00] font-extrabold mb-12">
       <h1>
         Writeups
-        <img src="/code/hacker.svg" alt="Logo" class="w-25 h-25 inline-block align-middle" />
+        <img src="/writeups-hacking/code/hacker.svg" alt="Logo" class="w-25 h-25 inline-block align-middle" />
         <span class="block">Hacking</span>
       </h1>
     </div>
@@ -55,26 +55,26 @@ export const prerender = true;
                   data-skills={(skills ?? []).join(' ').toLowerCase()}
                 >
                   {/* Imagen */}
-                  <a href={`/machines/${slug}`} class="mb-2 xl:mb-0 transition hover:scale-110">
+                  <a href={`/writeups-hacking/machines/${slug}`} class="mb-2 xl:mb-0 transition hover:scale-110">
                     <img
                       transition:name={`img-${slug}`}
                       class="mr-10 w-60 rounded"
-                      src={`/code/${img}`}
+                      src={`/writeups-hacking/code/${img}`}
                       alt={title}
                     />
                   </a>
                   
                   {/* Información */}
                   <div class="flex flex-col justify-center pl-3">
-                    <a href={`/machines/${slug}`} class="mb-2 xl:mb-0 transition hover:scale-110">
+                    <a href={`/writeups-hacking/machines/${slug}`} class="mb-2 xl:mb-0 transition hover:scale-110">
                       <h2 transition:name={`title-${slug}`} class="mb-0.5 text-3xl font-bold leading-tight text-white">
                         {title}
                       </h2>
                     </a>
 
                     <p class="flex items-center gap-1 mb-2">
-                      {os === "Linux" && <img src="/linux_logo.svg" alt="Linux" class="w-6 h-6" />}
-                      {os === "Windows" && <img src="/windows_logo.svg" alt="Windows" class="w-6 h-6"/>}
+                      {os === "Linux" && <img src="/writeups-hacking/linux_logo.svg" alt="Linux" class="w-6 h-6" />}
+                      {os === "Windows" && <img src="/writeups-hacking/windows_logo.svg" alt="Windows" class="w-6 h-6"/>}
                       {os}
                     </p>
 
@@ -96,7 +96,7 @@ export const prerender = true;
                     </p>
                     
                     <p class="flex items-center gap-1 mb-2">
-                      <img src="/hackthebox.svg" alt="Hackthebox" class="w-6 h-6"/>{plataforma}
+                      <img src="/writeups-hacking/hackthebox.svg" alt="Hackthebox" class="w-6 h-6"/>{plataforma}
                     </p>
 
                     <p class="mb-2 text-gray-300 max-w-sm">
