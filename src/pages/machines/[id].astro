@@ -39,13 +39,13 @@ export const prerender = true;
         <div transition:name="writeups-title-group" class="text-center">
           <div class="flex flex-row items-center gap-1 justify-center">
             <span class="text-3xl font-extrabold text-[#bfff00]">Writeups</span>
-            <img src="/writeups-hacking/code/hacker.svg" alt="Logo" class="w-10 h-10" />
+            <img src="/code/hacker.svg" alt="Logo" class="w-10 h-10" />
           </div>
           <span class="text-3xl font-extrabold text-[#bfff00] mt-0">Hacking</span>
         </div>
 
         <!-- Botón volver -->
-        <a href="/writeups-hacking" class="mt-4 text-xl text-white opacity-70 hover:underline">
+        <a href="/" class="mt-4 text-xl text-white opacity-70 hover:underline">
           ← Volver atrás
         </a>
 
@@ -53,7 +53,7 @@ export const prerender = true;
         <img 
           transition:name={`img-${slug}`} 
           class="rounded w-full max-w-xs md:w-55 h-auto mt-6" 
-          src={`/writeups-hacking/code/${img}`} 
+          src={`/code/${img}`} 
           alt={title} 
         />
       </div>
