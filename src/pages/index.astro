@@ -16,22 +16,17 @@ export const prerender = true;
 ---
 
 <Layout title="Writeups de la plataforma Hackthebox">
-  <head>
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href={`${Astro.base}favicon.svg`}>
-  </head>
-
   <main>
-    <!-- Título principal -->
+    {/* Título principal */}
     <div transition:name="writeups-title-group" class="text-center text-7xl text-[#bfff00] font-extrabold mb-12">
       <h1>
         Writeups
-        <img src={`${Astro.base}code/hacker.svg`} alt="Logo" class="w-25 h-25 inline-block align-middle" />
+        <img src="/code/hacker.svg" alt="Logo" class="w-25 h-25 inline-block align-middle" />
         <span class="block">Hacking</span>
       </h1>
     </div>
 
-    <!-- Barra de búsqueda sin botón -->
+    {/* Barra de búsqueda sin botón */}
     <div class="flex justify-center mb-12">
       <input
         type="text"
@@ -43,7 +38,7 @@ export const prerender = true;
       />
     </div>
 
-    <!-- Sección de writeups -->
+    {/* Sección de writeups */}
     <section aria-label="Writeups para desarrollar habilidades de hacking ético">
       <div class="px-4 mx-auto max-w-screen-xl">
         <div id="writeupsGrid" class="grid gap-6 md:grid-cols-2">
@@ -59,27 +54,27 @@ export const prerender = true;
                   data-dificultad={dificultad ?? ''} 
                   data-skills={(skills ?? []).join(' ').toLowerCase()}
                 >
-                  <!-- Imagen -->
-                  <a href={`${Astro.base}machines/${slug}`} class="mb-2 xl:mb-0 transition hover:scale-110">
+                  {/* Imagen */}
+                  <a href={`/machines/${slug}`} class="mb-2 xl:mb-0 transition hover:scale-110">
                     <img
                       transition:name={`img-${slug}`}
                       class="mr-10 w-60 rounded"
-                      src={`${Astro.base}code/${img}`}
+                      src={`/code/${img}`}
                       alt={title}
                     />
                   </a>
                   
-                  <!-- Información -->
+                  {/* Información */}
                   <div class="flex flex-col justify-center pl-3">
-                    <a href={`${Astro.base}machines/${slug}`} class="mb-2 xl:mb-0 transition hover:scale-110">
+                    <a href={`/machines/${slug}`} class="mb-2 xl:mb-0 transition hover:scale-110">
                       <h2 transition:name={`title-${slug}`} class="mb-0.5 text-3xl font-bold leading-tight text-white">
                         {title}
                       </h2>
                     </a>
 
                     <p class="flex items-center gap-1 mb-2">
-                      {os === "Linux" && <img src={`${Astro.base}linux_logo.svg`} alt="Linux" class="w-6 h-6" />}
-                      {os === "Windows" && <img src={`${Astro.base}windows_logo.svg`} alt="Windows" class="w-6 h-6"/>}
+                      {os === "Linux" && <img src="/linux_logo.svg" alt="Linux" class="w-6 h-6" />}
+                      {os === "Windows" && <img src="/windows_logo.svg" alt="Windows" class="w-6 h-6"/>}
                       {os}
                     </p>
 
@@ -101,7 +96,7 @@ export const prerender = true;
                     </p>
                     
                     <p class="flex items-center gap-1 mb-2">
-                      <img src={`${Astro.base}hackthebox.svg`} alt="Hackthebox" class="w-6 h-6"/>{plataforma}
+                      <img src="/hackthebox.svg" alt="Hackthebox" class="w-6 h-6"/>{plataforma}
                     </p>
 
                     <p class="mb-2 text-gray-300 max-w-sm">
@@ -161,6 +156,7 @@ export const prerender = true;
           var els = getEls();
           if (!els.input) return;
 
+          // Filtrar mientras escribe
           els.input.addEventListener('input', function() {
             var q = (els.input.value || '').trim().toLowerCase();
             setUrl(q, true);
@@ -175,6 +171,7 @@ export const prerender = true;
 
         window.addEventListener('pageshow', readFromUrlAndFilter);
         window.addEventListener('popstate', readFromUrlAndFilter);
+
         document.addEventListener('astro:page-load', function () {
           attachHandlersOnce();
           readFromUrlAndFilter();
@@ -183,7 +180,7 @@ export const prerender = true;
     </script>
   </main>
 
-  <!-- Footer compacto con fondo #13151a -->
+  {/* Footer compacto con fondo #13151a */}
   <footer class="py-1 mt-12 text-gray-400" style="background-color: #13151a;">
     <div class="max-w-screen-xl mx-auto px-4 text-center space-y-0 text-sm">
       <p>&copy; 4jh4ck 2025 - Writeups Hacking. Todos los derechos reservados.</p>
@@ -198,6 +195,5 @@ export const prerender = true;
     </div>
   </footer>
 </Layout>
-
 
 
