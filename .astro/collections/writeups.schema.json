@@ -1,0 +1,48 @@
+{
+  "$ref": "#/definitions/writeups",
+  "definitions": {
+    "writeups": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "img": {
+          "type": "string"
+        },
+        "plataforma": {
+          "type": "string"
+        },
+        "dificultad": {
+          "type": "string"
+        },
+        "skills": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "os",
+        "img",
+        "plataforma",
+        "dificultad",
+        "skills",
+        "description"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
