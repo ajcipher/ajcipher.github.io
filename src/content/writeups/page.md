@@ -39,11 +39,11 @@ Se comenzó realizando un análisis inicial sobre el sistema, cuyo objetivo prin
 
 **Ping**, para enviar solicitudes ICMP al host y confirmar su capacidad de respuesta, además de obtener información básica como ser el tipo de sistema operativo ya sea Windows o Linux mediante el **TTL**.
 
-![Ejecución del comando ping](/code/ping.png)
+![Ejecución del comando ping](../../../code/ping.png)
 
 **Nmap**, para efectuar un escaneo de puertos y servicios disponibles, identificando posibles puntos de entrada o servicios expuestos que pudieran ser analizados en etapas posteriores.
 
-![Ejecución del comando ping](/code/nmap.png)
+![Ejecución del comando ping](../../../code/nmap.png)
 
 Este proceso inicial permitió obtener una visión general del estado de la red y del sistema objetivo, sirviendo como base para definir la estrategia y priorizar las acciones en las siguientes fases de la evaluación.
 

@@ -40,11 +40,11 @@ Se comenzó realizando un análisis inicial sobre el sistema, cuyo objetivo prin
 
 **Ping**, para enviar solicitudes ICMP al host y confirmar su capacidad de respuesta, además de obtener información básica como ser el tipo de sistema operativo ya sea Windows o Linux mediante el **TTL**.
 
-[![Ejecución del comando ping](/writeups-hacking/code/ping.png)](/writeups-hacking/code/ping.png)
+[![Ejecución del comando ping](../../../code/ping.png)](../../../code/ping.png)
 
 **Nmap**, para efectuar un escaneo de puertos y servicios disponibles, identificando posibles puntos de entrada o servicios expuestos que pudieran ser analizados en etapas posteriores.
 
-[![Ejecución del comando ping](/writeups-hacking/code/nmap.png)](/writeups-hacking/code/nmap.png)
+[![Ejecución del comando ping](../../../code/nmap.png)](../../../code/nmap.png)
 
 Este proceso inicial permitió obtener una visión general del estado de la red y del sistema objetivo, sirviendo como base para definir la estrategia y priorizar las acciones en las siguientes fases de la evaluación.
 
@@ -63,7 +63,7 @@ En el contexto de una evaluación de seguridad, este hallazgo se considera un pu
 El analisis demuestra que este servicio se esta ejecutando en un sistema operativo ubuntu como se muestra en la
 siguiente imagen:
 
-[![Servicio de SSH (Secure Shell)](/writeups-hacking/code/ssh.png)](/writeups-hacking/code/ssh.png)
+[![Servicio de SSH (Secure Shell)](../../../code/ssh.png)](../../../code/ssh.png)
 
 #### Puerto 5000 (Servicio Web)
 
@@ -71,20 +71,20 @@ Al ejecutar el comando **whatweb** desde la terminal, se obtiene información de
 
 **Gunicorn** (Green Unicorn) es un servidor WSGI para aplicaciones Python ampliamente utilizado en entornos de producción debido a su simplicidad y eficiencia. La identificación de su versión especı́fica, en este caso **20.0.4**, resulta relevante ya que permite verificar si existen vulnerabilidades conocidas o configuraciones inseguras asociadas a dicha versión. Este tipo de información es fundamental para orientar fases posteriores de análisis, como la búsqueda en bases de datos de vulnerabilidades (por ejemplo, CVE o Exploit-DB) y la evaluación de posibles vectores de ataque contra el servicio.
 
-[![Servicio web puerto 5000 (Gunicorn)](/writeups-hacking/code/port5000.png)](/writeups-hacking/code/port5000.png)
+[![Servicio web puerto 5000 (Gunicorn)](../../../code/port5000.png)](../../../code/port5000.png)
 
 Al acceder al servicio web mediante un navegador utilizando la URL http://10.10.11.62:5000, se observa que el sistema está ejecutando un editor de código para el lenguaje de programación Python. Esta interfaz permite al usuario escribir y ejecutar código Python directamente desde el navegador, lo cual facilita la interacción y el desarrollo rápido dentro del entorno proporcionado.
 
 Si bien esta funcionalidad puede resultar muy útil en contextos controlados y para propósitos legı́timos, también implica un nivel considerable de riesgo desde la perspectiva de seguridad. La capacidad de ejecutar código remotamente sin las debidas restricciones o controles puede exponer el sistema a vulnerabilidades crı́ticas, tales como la ejecución arbitraria de código, escalación de privilegios o acceso no autorizado a recursos sensibles.
 
-[![Pagina web que corre un editor de código en lı́nea](/writeups-hacking/code/webpage.png)](/writeups-hacking/code/webpage.png)
+[![Pagina web que corre un editor de código en lı́nea](../../../code/webpage.png)](../../../code/webpage.png)
 
 
 ### Explotación del Sistema 
 
 Dado que podemos ejecutar código directamente desde la página de inicio, no es necesario crear una cuenta, a menos que queramos guardar o realizar un seguimiento de nuestro trabajo. Primero intentaremos cargar algunos módulos comunes, como import, os, write u open, ya que son fundamentales para ejecutar cargas útiles que interactúan con el sistema subyacente. Sin embargo, veremos inmediatamente que hay un filtro para impedirnos utilizar palabras clave restringidas y bloquear el uso de funciones y módulos potencialmente peligrosos.
 
-[![Implementación de reglas para impedir el uso de cargas útiles](/writeups-hacking/code/payload1.png)](/writeups-hacking/code/payload1.png)
+[![Implementación de reglas para impedir el uso de cargas útiles](../../../code/payload1.png)](../../../code/payload1.png)
 
 Dada la presencia de mecanismos de filtrado que restringen la ejecución directa de código en el servicio web, se torna indispensable identificar métodos para eludir estos filtros con el fin de avanzar en la evaluación de seguridad. Para ello, se llevó a cabo una investigación exhaustiva utilizando palabras clave como “python bypass” en motores de búsqueda y bases de datos especializadas.
 
@@ -127,11 +127,11 @@ getattr (test, 'sy' + 'stem')('ping -c 1 10.10.x.x')
 
 Ejecución del código python en la web:
 
-[![Código python en la web](/writeups-hacking/code/payload2.png)](/writeups-hacking/code/payload2.png)
+[![Código python en la web](/../../../code/payload2.png)](../../../code/payload2.png)
 
 Recibimos respuesta por parte del servido al ejecutar el comandon **ping**:
 
-[![Respuesta del comando ping](/writeups-hacking/code/term1.png)](/writeups-hacking/code/term1.png)
+[![Respuesta del comando ping](../../../code/term1.png)](../../../code/term1.png)
 
 Seguidamente ejecutaremos el siguiente código en el servicio web para obtener una **shell inversa** mediante **Netcat**:
 
@@ -147,7 +147,7 @@ nc -lnvp 443
 Al ejecutar el código en el servicio web, este establece una conexión de retorno hacia nuestra máquina atacante, otorgándonos una **shell inversa**. Este tipo de acceso nos permite interactuar directamente con el sistema objetivo como si estuviéramos trabajando desde su propia terminal, posibilitando la ejecución de comandos, la navegación por el sistema de archivos y la recolección de información sensible en tiempo real.
 
 
-[![Ejecucion del código en el servicio web para obtener una shell inversa](/writeups-hacking/code/payload3.png)](/writeups-hacking/code/payload3.png)
+[![Ejecucion del código en el servicio web para obtener una shell inversa](../../../code/payload3.png)](../../../code/payload3.png)
 
 Seguidamente, se procede a realizar un tratamiento de la **TTY** con el fin de mejorar la interacción con la sesión obtenida. Este proceso incluye la configuración de una terminal completamente funcional que soporte caracterı́sticas como edición de lı́nea, autocompletado y manejo de señales. De esta manera, al presionar combinaciones de teclas como **Ctrl + C**, la conexión no se interrumpe y se mantiene la estabilidad de la sesión.
 
