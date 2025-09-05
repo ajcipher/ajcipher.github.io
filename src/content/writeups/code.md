@@ -149,6 +149,10 @@ Al ejecutar el código en el servicio web, este establece una conexión de retor
 
 [![Ejecucion del código en el servicio web para obtener una shell inversa](/code/payload3.png)](/code/payload3.png)
 
+Obtenemos una **Shell Inversa** como **"app-production"** que es el usuario que esta corriendo el servicio web:
+
+[![Obteción de la revert shell](/code/nc.png)](/code/nc.png)
+
 Seguidamente, se procede a realizar un tratamiento de la **TTY** con el fin de mejorar la interacción con la sesión obtenida. Este proceso incluye la configuración de una terminal completamente funcional que soporte caracterı́sticas como edición de lı́nea, autocompletado y manejo de señales. De esta manera, al presionar combinaciones de teclas como **Ctrl + C**, la conexión no se interrumpe y se mantiene la estabilidad de la sesión.
 
 ```bash
@@ -159,10 +163,90 @@ stty raw -echo; fg
 reset xterm
 export TERM=xterm
 ```
+En la parpeta **home** del usuario **app-production** se encuentra la flag del usuario para ingresar en la plataforma:
 
+[![Flag de user](/code/user.png)](/code/user.png)
 
+Al listar los archivos y carpetas de la máquina encontramos un archivo database.db en la ruta **"/home/app-production/app/instance/database.db"** al inspecionar el archivo encontramos credenciales en **"md5"** las cuales intentamos romper obteniendo así la contraseña del usuario **development** y **martin**:
 
+[![Archivo sqlite](/code/sqlite.png)](/code/sqlite.png)
 
+Al utilizar hashcat para realizar un ataque de fuerza bruta mediante diccionario y romper las contraseñas obtenemos la contraseña del usuario martin:
 
+[![Contraseña de martin](/code/hashcat.png)](/code/hashcat.png)
 
+Al intentar conectarno a la máquina mediante **ssh** como el usuario **martin** obtenemos acceso:
+
+[![Acceso a la máquina](/code/martin01.png)](/code/martin01.png)
+
+Seguidamente hacemos un reconocimiento de los servicios y permisos que tiene el usuario martin al listar los privilegios del usuario con el comando "sudo -l" encontramos que puede ejecutar el comando "backy.sh" como root:
+
+[![enumeracion del sistama como martin](/code/martin02.png)](/code/martin02.png)
+
+Realizamos un reconocimiento del script para detectar si tiene alguna bulnerabilidad encontrando que la tarea que realiza es recibir como entrada un archivo **json** que contiene una lista de directorios para realizar un backup de los mismos:
+
+```python
+#!/bin/bash
+
+if [[ $# -ne 1 ]]; then
+    /usr/bin/echo "Usage: $0 <task.json>"
+    exit 1
+fi
+
+json_file="$1"
+
+if [[ ! -f "$json_file" ]]; then
+    /usr/bin/echo "Error: File '$json_file' not found."
+    exit 1
+fi
+
+allowed_paths=("/var/" "/home/")
+
+updated_json=$(/usr/bin/jq '.directories_to_archive |= map(gsub("\\.\\./"; ""))' "$json_file")
+
+/usr/bin/echo "$updated_json" > "$json_file"
+
+directories_to_archive=$(/usr/bin/echo "$updated_json" | /usr/bin/jq -r '.directories_to_archive[]')
+
+is_allowed_path() {
+    local path="$1"
+    for allowed_path in "${allowed_paths[@]}"; do
+        if [[ "$path" == $allowed_path* ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+for dir in $directories_to_archive; do
+    if ! is_allowed_path "$dir"; then
+        /usr/bin/echo "Error: $dir is not allowed. Only directories under /var/ and /home/ are allowed."
+        exit 1
+    fi
+done
+
+/usr/bin/backy "$json_file"
+```
+
+Encontramos una vulnerabilidad en la linea:
+
+```python
+updated_json=$(/usr/bin/jq '.directories_to_archive |= map(gsub("\\.\\./"; ""))' "$json_file")
+```
+
+En donde el script realiza un filtrado de un path traversal eliminando el **`../`**, pero solo lo hace una vez, permitiéndonos escribir **`....//`** en el archivo JSON para apuntar a otro directorio como ser el directorio **root**. 
+
+En el directorio home del usuario martin encontramos un directorio con el nombre backups al ingresar en el encontramos un comprimido **.tar.bz2** y un archivo **task.json** al investigar el archivo json enconramos:
+
+[![Arvhivo task](/code/task01.png)](/code/task01.png)
+
+Al editar el campo `directories_to_archive` y sustituir `/home/app-production/app` por `/home/....//root` dando como resultado en el archivo json:
+
+[![Archivo json modificado](/code/task02.png)](/code/task02.png)
+
+Al ejecutar el comando `sudo /usr/bin/backy.sh` generamos un backup de la ruta `/root` que lo almacena en el directorio `/home/martin/backups` como un comprimido `.tar.bz2` en el cual se encuentra al directorio del usuario **root**:
+
+[![Generar comprimido directorio root](/code/task03.png)](/code/task03.png)
+
+Proseguimos con descomprimir el archivo generado y asi poder obtener la flag del usuario **root** y si deseamo podemos conectarnos como dicho usuario mediante **ssh** debido a que obtenemos acesso a su **clave ssh**.
 
