@@ -129,4 +129,4 @@ Luego mediante el comando **whoami** comprobamos que somos el usuario **nt autho
 
 [![comprobación de usuario](/jerry/terminal02.png)](/jerry/terminal02.png)
 
-Por ultimo nos dirigimos al directorio `C:\Users\Administrator\Desktop\flags` y litamos el archivo `2 for the price of 1.txt` en el cual se encuentran las flags y user y root.
+Por ultimo nos dirigimos al directorio `C:\Users\Administrator\Desktop\flags` y listamos el archivo `2 for the price of 1.txt` en el cual se encuentran las flags de user y root.
