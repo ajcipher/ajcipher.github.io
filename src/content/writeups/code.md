@@ -2,7 +2,7 @@
 title: Code 
 os: Linux 
 dificultad: Facil 
-img: Code_logo.png 
+img: code/Code_logo.png 
 skills:
   - Web Enumeration
   - Python Jail (Reverse Shell Restriction Bypass)
